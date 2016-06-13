@@ -1,0 +1,44 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "geo": {
+    "name": "geo",
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://maps.googleapis.com/maps/api/geocode/{format=json}",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json"
+          },
+          "query": {
+            "address": "{street},{city},{zipcode}",
+            "sensor": "{sensor=false}"
+          },
+          "responsePath": "$.results[0].geometry.location"
+        },
+        "functions": {
+          "geocode": [
+            "street",
+            "city",
+            "zipcode"
+          ]
+        }
+      }
+    ]
+  },
+  "mongo": {
+    "host": "mtpc457.mitrais.com",
+    "port": 27017,
+    "url": "",
+    "database": "margi",
+    "password": "",
+    "name": "mongo",
+    "user": "",
+    "connector": "mongodb"
+  }
+}

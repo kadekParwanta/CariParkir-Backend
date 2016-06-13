@@ -1,0 +1,75 @@
+{
+  "name": "Parking",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "available": {
+      "type": "number",
+      "required": true,
+      "default": "0"
+    },
+    "total": {
+      "type": "number",
+      "required": true,
+      "default": "0"
+    },
+    "rate": {
+      "type": "string",
+      "required": true,
+      "default": "0"
+    },
+    "geo": {
+      "type": "geopoint",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "nearby": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "here",
+          "type": "geopoint",
+          "required": true,
+          "description": "geo location (lat & lng)"
+        },
+        {
+          "arg": "page",
+          "type": "number",
+          "required": false,
+          "description": "number of pages (page size=10)"
+        },
+        {
+          "arg": "max",
+          "type": "number",
+          "required": false,
+          "description": "max distance in miles"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "locations",
+          "type": "string",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "Find nearby locations around the geo point",
+      "http": []
+    }
+  }
+}
