@@ -32,7 +32,13 @@
     ]
   },
   "mongo": {
-    "url": "${process.env.MONGODB_URI}",
+    "host": "ds013574.mlab.com",
+    "port": 13574,
+    "url": "",
+    "database": "heroku_20l4wl42",
+    "password": "ombpkqr0a7tdc8fr8s5bv1pinj",
+    "name": "mongo",
+    "user": "heroku_20l4wl42",
     "connector": "mongodb"
   }
 }
