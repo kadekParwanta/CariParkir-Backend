@@ -32,13 +32,13 @@
     ]
   },
   "mongo": {
-    "host": "ds013574.mlab.com",
-    "port": 13574,
+    "host": "mtpc457.mitrais.com",
+    "port": 27017,
     "url": "",
-    "database": "heroku_20l4wl42",
-    "password": "ombpkqr0a7tdc8fr8s5bv1pinj",
+    "database": "margi",
+    "password": "",
     "name": "mongo",
-    "user": "heroku_20l4wl42",
+    "user": "",
     "connector": "mongodb"
   }
 }
