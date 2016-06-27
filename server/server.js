@@ -18,10 +18,26 @@ app.start = function() {
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
-boot(app, __dirname, function(err) {
+boot(app, __dirname, function (err) {
   if (err) throw err;
 
   // start the server if `$ node server.js`
-  if (require.main === module)
-    app.start();
+  if (require.main === module) {
+    // app.start();
+    app.io = require('socket.io')(app.start());
+
+    app.io.on('connection', function (socket) {
+      console.log('a user connected');
+      socket.on('disconnect', function () {
+        console.log('user disconnected');
+      });
+
+      socket.on('chat message', function (msg) {
+        console.log('message: ' + msg);
+        app.io.emit('chat message', msg);
+      });
+
+    });
+  }
+    
 });

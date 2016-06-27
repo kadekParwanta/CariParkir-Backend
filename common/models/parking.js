@@ -1,7 +1,7 @@
 module.exports = function (Parking) {
     var loopback = require('loopback');
-
     var GeoPoint = loopback.GeoPoint;
+    var pubsub = require('../../server/pubsub.js');
 
 
     /**
@@ -69,7 +69,43 @@ loopback.remoteMethod(
             arg: 'locations',
             root: true
         }
-    }
-);
+    });
+    
+    //Publish
+    //Parking after save..
+    Parking.observe('after save', function (ctx, next) {
+        var socket = Parking.app.io;
+        if(ctx.isNewInstance){
+            //Now publishing the data..
+            pubsub.publish(socket, {
+                collectionName : 'Parking',
+                data: ctx.instance,
+                method: 'POST'
+            });
+        }else{
+            //Now publishing the data..
+            pubsub.publish(socket, {
+                collectionName : 'Parking',
+                data: ctx.instance,
+                modelId: ctx.instance.id,
+                method: 'PUT'
+            });
+        }
+        //Calling the next middleware..
+        next();
+    }); //after save..
+    //Parking before delete..
+    Parking.observe("before delete", function(ctx, next){
+            var socket = Parking.app.io;
+            //Now publishing the data..
+            pubsub.publish(socket, {
+                collectionName : 'Parking',
+                data: ctx.instance.id,
+                modelId: ctx.instance.id,
+                method: 'DELETE'
+            });
+            //move to next middleware..
+            next();
+    }); //before delete..
 
 };
