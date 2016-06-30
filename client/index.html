@@ -35,6 +35,10 @@
       $('#messages').append($('<li>').text(data.id + " is updated"));
     });
 
+    socket.on('/Parking/POST', function(data){
+      $('#messages').append($('<li>').text(data.id + " is created"));
+    });
+
     </script>
   </body>
 </html>
