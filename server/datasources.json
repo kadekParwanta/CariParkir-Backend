@@ -32,20 +32,20 @@
     ]
   },
   "mongo": {
-    "host": "ds013574.mlab.com",
-    "port": 13574,
-    "url": "",
-    "database": "heroku_20l4wl42",
-    "password": "ombpkqr0a7tdc8fr8s5bv1pinj",
-    "name": "mongo",
-    "user": "heroku_20l4wl42",
+    "host": "${OPENSHIFT_MONGODB_DB_HOST}",
+    "port": "${OPENSHIFT_MONGODB_DB_HOST}",
+    "url": "${OPENSHIFT_MONGODB_DB_URL}",
+    "database": "myguide",
+    "password": "${OPENSHIFT_MONGODB_DB_PASSWORD}",
+    "name": "mongodb",
+    "user": "${OPENSHIFT_MONGODB_DB_USERNAME}",
     "connector": "mongodb"
   },
   "storage": {
     "name": "storage",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "./server/storage",
+    "root": "${OPENSHIFT_DATA_DIR}",
     "maxFileSize": "52428800"
   }
 }
