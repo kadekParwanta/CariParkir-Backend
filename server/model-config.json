@@ -35,5 +35,9 @@
   "Parking": {
     "dataSource": "mongo",
     "public": true
+  },
+  "Container": {
+    "dataSource": "storage",
+    "public": true
   }
 }
